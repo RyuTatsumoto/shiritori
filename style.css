@@ -1,35 +1,8 @@
-body { /* 変更なし */ font-family: sans-serif; display: flex; flex-direction: column; align-items: center; padding: 10px; box-sizing: border-box; }
-#initialSetup { /* 変更なし */ width: 100%; max-width: 600px; margin-top: 20px; padding: 15px; border: 1px solid #ccc; border-radius: 8px; box-shadow: 2px 2px 5px rgba(0,0,0,0.1); box-sizing: border-box; }
-
-/* ★★★ ゲーム画面全体のラッパー ★★★ */
-#gameWrapper {
-    display: flex; /* タイトルとメインエリアを縦に積む */
-    flex-direction: column;
-    align-items: center; /* 中央揃え */
-    width: 100%; /* 幅を確保 */
-    max-width: 900px; /* 最大幅 */
-    margin-top: 20px;
-}
-
-/* ★★★ ゲーム画面のタイトル ★★★ */
-#gameTitle {
-    font-size: 1.5em; /* 初期設定画面のタイトルと合わせる */
-    margin-bottom: 15px; /* 下にマージン */
-    text-align: center;
-}
-
-
-/* mainGameArea のマージンを削除 */
-#mainGameArea {
-    display: flex;
-    width: 100%; /* ラッパー内で幅いっぱい */
-    /* max-width は wrapper で指定するので削除 */
-    /* margin-top は wrapper で指定するので削除 */
-    gap: 20px;
-}
-
-
-/* (以降のスタイルは変更なし) */
+body { font-family: sans-serif; display: flex; flex-direction: column; align-items: center; padding: 10px; box-sizing: border-box; }
+#initialSetup { width: 100%; max-width: 600px; margin-top: 20px; padding: 15px; border: 1px solid #ccc; border-radius: 8px; box-shadow: 2px 2px 5px rgba(0,0,0,0.1); box-sizing: border-box; }
+#gameWrapper { display: flex; flex-direction: column; align-items: center; width: 100%; max-width: 900px; margin-top: 20px; }
+#gameTitle { font-size: 1.5em; margin-bottom: 15px; text-align: center; }
+#mainGameArea { display: flex; width: 100%; gap: 20px; }
 #leftPanel { flex: 2; display: flex; flex-direction: column; }
 #rightPanel { flex: 1; border: 1px solid #ccc; border-radius: 8px; box-shadow: 2px 2px 5px rgba(0,0,0,0.1); display: flex; flex-direction: column; height: 70vh; }
 #logTitleContainer { padding: 15px 15px 5px 15px; flex-shrink: 0; border-bottom: 1px solid #eee; }
@@ -40,6 +13,7 @@ body { /* 変更なし */ font-family: sans-serif; display: flex; flex-direction
 #logList li:first-child { border-top: none; }
 #logList li.pass-log { color: #888; font-style: italic; }
 #logList li span.log-word { margin-right: 10px; }
+.log-length { font-size: 0.9em; color: #666; margin-left: 4px; }
 .cancel-log-button { padding: 2px 6px; font-size: 0.8em; background-color: #dc3545; color: white; border: none; border-radius: 3px; cursor: pointer; flex-shrink: 0; }
 .cancel-log-button:hover { background-color: #c82333; }
 .cancel-log-button.hidden { display: none; }
@@ -49,13 +23,46 @@ body { /* 変更なし */ font-family: sans-serif; display: flex; flex-direction
 #keyboard { display: flex; flex-direction: column; gap: 0; margin-bottom: 15px; width: 100%; box-sizing: border-box; }
 .keyboard-group { display: flex; flex-wrap: wrap; direction: rtl; justify-content: flex-start; gap: 8px; width: 100%; padding-bottom: 5px; }
 .key-column { display: flex; flex-direction: column; gap: 5px; width: 45px; flex-shrink: 0; }
-.key { position: relative; padding: 8px 0; width: 100%; font-size: 1.1em; text-align: center; border: 1px solid #ccc; border-radius: 4px; cursor: pointer; background-color: #f9f9f9; user-select: none; min-height: 40px; display: flex; justify-content: center; align-items: center; box-sizing: border-box; visibility: visible; transition: transform 0.1s ease-out, background-color 0.2s; }
-.key.empty { visibility: hidden; border: none; background: none; cursor: default; }
+
+/* ★★★ .key のスタイル変更 ★★★ */
+.key {
+    position: relative;
+    padding: 8px 0; /* 上下パディング */
+    width: 100%;
+    font-size: 1.1em;
+    text-align: center;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    cursor: pointer;
+    background-color: #f9f9f9;
+    user-select: none;
+    /* min-height: 40px; */ /* ← コメントアウトまたは削除 */
+    height: 42px; /* ★ 固定高さを指定 (値は要調整) */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    box-sizing: border-box;
+    visibility: visible;
+    transition: transform 0.1s ease-out, background-color 0.2s;
+}
+
+/* ★★★ .key.empty のスタイル変更 ★★★ */
+.key.empty {
+    visibility: hidden;
+    background: none;
+    cursor: default;
+    border: 1px solid transparent; /* ボーダー幅は透明で確保 */
+    padding: 8px 0; /* 通常キーと同じパディング */
+    /* min-height: 40px; */ /* ← コメントアウトまたは削除 */
+    height: 42px; /* ★ 通常キーと同じ固定高さを指定 (値は要調整) */
+}
 .key.empty .count { display: none; }
-.key.empty.disabled { background: none; }
+.key.empty.disabled { background: none; border-color: transparent; }
+
 .key .count { position: absolute; bottom: 1px; right: 3px; font-size: 0.7em; color: #555; }
+.key.medium-count { background-color: #fff3cd; }
 .key.low-count { background-color: #f8d7da; font-weight: bold; }
-.key.disabled { background-color: #ddd; color: #888; cursor: not-allowed; }
+.key.disabled { background-color: #ddd; color: #888; cursor: not-allowed; border-color: #ccc; }
 .key:not(.empty):not(.disabled):hover { transform: scale(1.1); z-index: 1; }
 .keyboard-hr-separator { height: 1px; background-color: #bbb; width: 100%; border: none; margin: 10px 0; }
 .action-buttons { display: flex; gap: 10px; align-items: center; margin-top: auto; padding-top: 15px; }
@@ -63,8 +70,8 @@ body { /* 変更なし */ font-family: sans-serif; display: flex; flex-direction
 #confirmButton:hover { background-color: #45a049; }
 #passButton { padding: 12px 20px; font-size: 1.1em; background-color: #f0ad4e; color: white; border: none; border-radius: 4px; cursor: pointer; box-sizing: border-box; }
 #passButton:hover { background-color: #ec971f; }
-.pass-counter { margin-left: auto; font-size: 0.9em; color: #555; }
-#passCount { font-weight: bold; }
+.counters { margin-left: auto; display: flex; flex-direction: column; align-items: flex-end; gap: 2px; font-size: 0.9em; color: #555; text-align: right; }
+.total-points span, .pass-counter span { font-weight: bold; min-width: 20px; display: inline-block; text-align: right; }
 #initialSetup h1 { margin-top: 0; font-size: 1.5em; text-align: center; }
 #initialSetup label { margin-right: 5px; }
 #initialSetup input[type="number"] { width: 50px; padding: 5px; margin-right: 10px; font-size: 1em; }

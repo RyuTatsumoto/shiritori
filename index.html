@@ -14,11 +14,8 @@
         <button id="startButton">ゲーム開始</button>
     </div>
 
-    <!-- ★ ゲーム画面全体を内包するラッパーを追加 (タイトルとメインエリアを分ける) ★ -->
     <div id="gameWrapper" style="display: none;">
-        <!-- ★ プレイ画面用のタイトルを追加 ★ -->
         <h1 id="gameTitle">手持ちひらがなしりとり</h1>
-
         <div id="mainGameArea">
             <div id="leftPanel">
                 <div class="input-container">
@@ -29,8 +26,14 @@
                 <div class="action-buttons">
                     <button id="confirmButton">確定</button>
                     <button id="passButton">パス</button>
-                    <div class="pass-counter">
-                        パス回数: <span id="passCount">0</span>
+                    <div class="counters">
+                        <div class="total-points">
+                            <!-- ★★★ ここに id="totalPoints" があるか確認 ★★★ -->
+                            合計: <span id="totalPoints">0</span> pt
+                        </div>
+                        <div class="pass-counter">
+                            パス: <span id="passCount">0</span> 回
+                        </div>
                     </div>
                 </div>
             </div>
@@ -46,7 +49,6 @@
             </div>
         </div>
     </div>
-
     <script src="script.js"></script>
 </body>
 </html>
