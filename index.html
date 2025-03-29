@@ -21,6 +21,8 @@
                 <div class="input-container">
                     <input type="text" id="inputArea" readonly placeholder="ボタンを押して入力">
                     <button id="backspaceButton">１字消す</button>
+                    <!-- ★★★ コピーボタンを追加 ★★★ -->
+                    <button id="copyButton" title="入力内容をコピー">コピー</button>
                 </div>
                 <div id="keyboard"> <!-- JSで生成 --> </div>
                 <div class="action-buttons">
@@ -28,7 +30,6 @@
                     <button id="passButton">パス</button>
                     <div class="counters">
                         <div class="total-points">
-                            <!-- ★★★ ここに id="totalPoints" があるか確認 ★★★ -->
                             合計: <span id="totalPoints">0</span> pt
                         </div>
                         <div class="pass-counter">
@@ -48,6 +49,8 @@
                 </div>
             </div>
         </div>
+        <!-- ★★★ コピー成功/失敗メッセージ表示用 ★★★ -->
+        <div id="copyMessage" class="copy-message"></div>
     </div>
     <script src="script.js"></script>
 </body>
