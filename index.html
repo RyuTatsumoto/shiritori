@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>手持ちひらがなしりとり</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div id="initialSetup">
+        <h1>手持ちひらがなしりとり</h1>
+        <label for="initialCount">各文字の初期個数:</label>
+        <input type="number" id="initialCount" value="5" min="1">
+        <button id="startButton">ゲーム開始</button>
+    </div>
+
+    <!-- ★ ゲーム画面全体を内包するラッパーを追加 (タイトルとメインエリアを分ける) ★ -->
+    <div id="gameWrapper" style="display: none;">
+        <!-- ★ プレイ画面用のタイトルを追加 ★ -->
+        <h1 id="gameTitle">手持ちひらがなしりとり</h1>
+
+        <div id="mainGameArea">
+            <div id="leftPanel">
+                <div class="input-container">
+                    <input type="text" id="inputArea" readonly placeholder="ボタンを押して入力">
+                    <button id="backspaceButton">１字消す</button>
+                </div>
+                <div id="keyboard"> <!-- JSで生成 --> </div>
+                <div class="action-buttons">
+                    <button id="confirmButton">確定</button>
+                    <button id="passButton">パス</button>
+                    <div class="pass-counter">
+                        パス回数: <span id="passCount">0</span>
+                    </div>
+                </div>
+            </div>
+            <div id="rightPanel">
+                <div id="logTitleContainer">
+                     <h2>単語ログ</h2>
+                </div>
+                <div id="logListContainer">
+                     <ul id="logList">
+                         <!-- JSで生成 -->
+                     </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
