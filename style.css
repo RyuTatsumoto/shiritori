@@ -11,7 +11,7 @@ body { font-family: sans-serif; display: flex; flex-direction: column; align-ite
 #logList { list-style: none; padding: 0; margin: 0; }
 #logList li { padding: 5px 0; border-bottom: 1px dashed #eee; display: flex; justify-content: space-between; align-items: center; }
 #logList li:first-child { border-top: none; }
-#logList li span.log-word { margin-right: 10px; word-break: break-all; /* 長い単語がはみ出ないように */ }
+#logList li span.log-word { margin-right: 10px; word-break: break-all; }
 .log-point { font-size: 0.9em; font-weight: bold; margin-left: 4px; white-space: nowrap; }
 .log-point.plus { color: green; }
 .log-point.minus { color: red; }
@@ -19,12 +19,24 @@ body { font-family: sans-serif; display: flex; flex-direction: column; align-ite
 .cancel-log-button { padding: 2px 6px; font-size: 0.8em; background-color: #dc3545; color: white; border: none; border-radius: 3px; cursor: pointer; flex-shrink: 0; }
 .cancel-log-button:hover { background-color: #c82333; }
 .cancel-log-button.hidden { display: none; }
-.input-container { display: flex; margin-bottom: 15px; }
-#inputArea { flex-grow: 1; padding: 10px; font-size: 1.2em; border: 1px solid #ccc; border-radius: 4px 0 0 4px; min-width: 0; }
-#backspaceButton, #copyButton { padding: 10px; border: 1px solid #ccc; border-left: none; cursor: pointer; white-space: nowrap; background-color: #f9f9f9; }
-#backspaceButton:hover, #copyButton:hover { background-color: #eee; }
+.input-container { display: flex; margin-bottom: 15px; align-items: stretch; /* ★ 高さを揃える */ }
+
+/* ★★★ 入力欄とボタンの高さ・サイズ調整 ★★★ */
+#inputArea {
+    flex-grow: 1; padding: 12px; /* ★ パディング調整 */ font-size: 1.3em; /* ★ 少し大きく */ border: 1px solid #ccc;
+    border-radius: 4px 0 0 4px; min-width: 0; height: auto; /* 高さは内容に合わせる */
+}
+#backspaceButton,
+#copyButton {
+    padding: 12px 15px; /* ★ パディング調整 */ font-size: 1em; /* ★ サイズ調整 */
+    border: 1px solid #ccc; border-left: none; cursor: pointer; white-space: nowrap; background-color: #f9f9f9;
+    display: flex; align-items: center; /* ★ 縦中央揃え */
+}
+#backspaceButton:hover,
+#copyButton:hover { background-color: #eee; }
 #backspaceButton { border-radius: 0; }
-#copyButton { border-radius: 0 4px 4px 0; }
+#copyButton { border-radius: 0 4px 4px 0; font-size: 1.1em; /* ★ コピーボタンを少し大きく */}
+
 #keyboard { display: flex; flex-direction: column; gap: 0; margin-bottom: 15px; width: 100%; box-sizing: border-box; }
 .keyboard-group { display: flex; flex-wrap: wrap; direction: rtl; justify-content: flex-start; gap: 8px; width: 100%; padding-bottom: 5px; }
 .key-column { display: flex; flex-direction: column; gap: 5px; width: 45px; flex-shrink: 0; }
@@ -58,10 +70,9 @@ body { font-family: sans-serif; display: flex; flex-direction: column; align-ite
 .copy-message.show { opacity: 1; }
 .stats-popup { display: none; position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%); background-color: white; padding: 25px 30px; border-radius: 8px; box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2); z-index: 1001; min-width: 250px; text-align: center; }
 .stats-popup h2 { margin-top: 0; margin-bottom: 20px; font-size: 1.4em; }
-.stats-popup p { margin: 12px 0; /* 少し間隔調整 */ font-size: 1.1em; }
+.stats-popup p { margin: 10px 0; font-size: 1.1em; line-height: 1.4; /* ★ 行間調整 */ }
 .stats-popup p span { font-weight: bold; font-size: 1.2em; margin: 0 3px; }
-/* ★ 枯渇文字リストのスタイル */
-#zeroCharsList { font-size: 1.3em; /* 文字を少し大きく */ letter-spacing: 0.1em; /* 文字間隔 */ }
+#zeroCharsList { font-size: 1.3em; letter-spacing: 0.1em; }
 .popup-buttons { margin-top: 25px; display: flex; justify-content: center; gap: 15px; }
 #closeStatsButton, #restartButton { padding: 10px 20px; font-size: 1em; cursor: pointer; border-radius: 4px; border: 1px solid #ccc; }
 #closeStatsButton { background-color: #f0f0f0; }
