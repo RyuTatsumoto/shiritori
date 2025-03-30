@@ -21,13 +21,13 @@
                 <div class="input-container">
                     <input type="text" id="inputArea" readonly placeholder="ボタンを押して入力">
                     <button id="backspaceButton">１字消す</button>
-                    <!-- ★★★ コピーボタンを追加 ★★★ -->
                     <button id="copyButton" title="入力内容をコピー">コピー</button>
                 </div>
                 <div id="keyboard"> <!-- JSで生成 --> </div>
                 <div class="action-buttons">
                     <button id="confirmButton">確定</button>
                     <button id="passButton">パス</button>
+                    <button id="endGameButton">ゲーム終了</button>
                     <div class="counters">
                         <div class="total-points">
                             合計: <span id="totalPoints">0</span> pt
@@ -49,8 +49,26 @@
                 </div>
             </div>
         </div>
-        <!-- ★★★ コピー成功/失敗メッセージ表示用 ★★★ -->
         <div id="copyMessage" class="copy-message"></div>
+        <div id="pointChangePopup" class="point-change-popup">
+            <span class="bonus-text"></span>
+            <span class="point-value"></span>
+        </div>
+        <!-- ★★★ 統計情報ポップアップ (内容追加) ★★★ -->
+        <div id="statsPopup" class="stats-popup">
+            <h2>ゲーム結果</h2>
+            <p>最終ポイント: <span id="finalPoints">0</span> pt</p>
+            <p>パス回数: <span id="finalPassCount">0</span> 回</p>
+            <!-- ★ Longest Word 表示エリア ★ -->
+            <p id="longestWordStat">Longest Word: <span id="longestWordText">-</span> (<span id="longestWordLength">0</span>文字)</p>
+            <!-- ★ 最初に枯渇した文字 表示エリア ★ -->
+            <p id="zeroCharsStat">最初に枯渇した文字:<br><span id="zeroCharsList">-</span></p>
+            <div class="popup-buttons">
+                 <button id="restartButton">もう一度プレイ</button>
+                 <button id="closeStatsButton">閉じる</button>
+            </div>
+        </div>
+        <div id="overlay" class="overlay"></div>
     </div>
     <script src="script.js"></script>
 </body>
